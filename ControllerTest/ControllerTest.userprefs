@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SoulMenuInteraction.cs">
     <Files>
-      <File FileName="Assets\NewBehaviourScript.cs" Line="34" Column="16" />
+      <File FileName="Assets\NewBehaviourScript.cs" Line="33" Column="84" />
       <File FileName="Assets\SoulMenuInteraction.cs" Line="26" Column="91" />
     </Files>
   </MonoDevelop.Ide.Workbench>

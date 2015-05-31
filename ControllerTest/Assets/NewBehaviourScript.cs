@@ -13,19 +13,31 @@ public class NewBehaviourScript : MonoBehaviour {
 	void Start () {
 		//horizontalSpeed = 0;
 		horizontalSpeed = 3.5f;
+		Debug.Log (Time.deltaTime);
+		Debug.Log (Time.fixedDeltaTime);
+		//Time.timeScale = 0.1f;
+		Debug.Log (Time.deltaTime);
+		Debug.Log (Time.fixedDeltaTime);
+		//Time.fixedDeltaTime *= 0.5f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (Time.deltaTime);
 
-		if (Input.GetKey ("left"))
-			this.transform.position -= new Vector3(horizontalSpeed * Time.deltaTime, 0.0f, 0.0f);
+		if (Input.GetKey ("left") || (Input.GetAxis ("Horizontal") < 0)) {
+			Debug.Log("LEFT");
+			this.transform.position -= new Vector3 (horizontalSpeed * Time.deltaTime, 0.0f, 0.0f);
+		}
 
-		if (Input.GetKey ("right"))
+		if (Input.GetKey ("right")||(Input.GetAxis("Horizontal")>0))
 			this.transform.position += new Vector3(horizontalSpeed * Time.deltaTime, 0.0f, 0.0f);
 
 		if (Input.GetKeyDown ("up") && allowedToJump()) 
 			this.GetComponent<Rigidbody2D>().AddForce (Vector2.up * 300);
+
+		if (Input.GetButtonDown ("OpenMenu"))
+			Debug.Log ("UseSOuls");
 	}
 
 	bool allowedToJump() {
