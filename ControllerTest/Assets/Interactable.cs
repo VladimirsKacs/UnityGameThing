@@ -53,7 +53,7 @@ namespace AssemblyCSharp
 		//toggles indestructible quality
 		void toggleIndestructible ()
 		{
-			if (!this.alwaysIndestructible) {
+			if (!this.alwaysIndestructible && !this.immuneToSouls) {
 				this.isIndestructible = ~this.isIndestructible;
 			}
 		}
@@ -61,8 +61,9 @@ namespace AssemblyCSharp
 		//toggles annihilator quality
 		void toggleAnnihilator () 
 		{
-			if (!this.alwaysAnnihilator)
-			this.isAnnihilator = ~this.isAnnihilator;
+			if (!this.alwaysAnnihilator && !this.immuneToSouls) {
+				this.isAnnihilator = ~this.isAnnihilator;
+			}
 		}
 
 		void OnCollisionEnter (Collision col) {
