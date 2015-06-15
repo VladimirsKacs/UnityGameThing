@@ -27,26 +27,27 @@ namespace AssemblyCSharp
 
 		public bool isIndestructible; //tell if the object is indestructible/annihilator
 		public bool isAnnihilator;
+		
+		public bool immuneToSouls;
 
 		public Interactable objectHit; //stores the colliding object
 
 		public Interactable ()
 		{
-			Debug.Log ("Object is being created");
+			Debug.Log ("Interactable object is being created");
 		}
 
 		//slows down objects upon use of yellow souls
 		void reduceObjTimeScale () 
 		{
-			if (this.objTimeScale == 1f) {
+			if (!this.immuneToSouls) {
 				this.objTimeScale *= slowTime;
 			}
 		}
 		//restores normal movement speed to objects
-		void restoreObjTimeScale () {
-			if (this.objTimeScale == 0.2f) {
-				this.objTimeScale /= slowTime;
-			}
+		void restoreObjTimeScale ()
+		{
+			this.objTimeScale = 1.0f;
 		}
 
 		//toggles indestructible quality
