@@ -19,7 +19,9 @@ namespace AssemblyCSharp
 
 		public float objTimeScale = 1f; //default speed of all objects
 		private float slowTime = 0.2f; //multiplier to add the slow effect of yellow souls
-
+		public int slowDuration = 5; //duration of slow
+		public int slowTimer = 0;
+		
 		public Vector3 objMovementVector; //movement vector for the levitation effect of blue souls
 
 		public bool alwaysIndestructible; //for objects that are always indestructible or annihilator
@@ -27,6 +29,12 @@ namespace AssemblyCSharp
 
 		public bool isIndestructible; //tell if the object is indestructible/annihilator
 		public bool isAnnihilator;
+		
+		public int annihilatorDuration = 5; //duration of annihilator state
+		public int indestructibleDuration = 5; //duration of indesructible state
+		//timers from annihilator and idnestructible states
+		public int annihilatorTimer = 0;
+		public int indestructibleTimer = 0;
 		
 		public bool immuneToSouls;
 
@@ -70,7 +78,7 @@ namespace AssemblyCSharp
 			objectHit = col.gameObject;
 		}
 
-		void annihilateNextTarget () {
+		/*void annihilateNextTarget () {
 			if (objectHit.isIndestructible == false) {
 				//Animation.Play();
 				Destroy(objectHit);
@@ -78,7 +86,49 @@ namespace AssemblyCSharp
 					this.isAnnihilator = false;
 				}
 			} 
+		}*/
+	}
+	
+	public class Platform: Interactable
+	{
+		public Vector3[] navPoints; //contains navigation points for monsters patrolling the platform
+		public bool hasBorders; //shows whether monsters can fall off the platform
+		alwaysIndestructible = true;
+		
+		public GameObject[] collidingObjects; //contains all colliding objects
+		
+		void OnCollisionEnter (Collision col)
+		{
+			collidingObjects.Add(col.gameObject);
 		}
+		
+		void platformAnnihilates ()
+		{
+			for (i = 0; i < platformIsAnnihilator.length; i++) {
+				if (!collidingObjects[i].isIndestructible && !collidingObjects[i].immuneToSouls) {
+					Destroy(collidingObjects[i]);
+				}
+			}
+		}
+		
+		void platformSlows ()
+		{
+			for (i = 0; i < platformIsAnnihilator.length; i++) {
+				if (!collidingObjects[i].isIndestructible) {
+					collidingObjects[i].reduceObjTimeScale;
+				}
+			}
+		}
+		
+		//TODO: write function that removes a game object from the array when it stops touching the platform
+		// void OnCollisionExit
+	}
+	
+	public class Enemy: Interactable
+	{
+		private Vector3 spawnPoint; //determines where the enemy will be instantiated
+		private GameObject homePlatform; //monster's "home platform" for the purpose of route calculation
+		
 	}
 }
 
